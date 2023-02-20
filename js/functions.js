@@ -24,6 +24,23 @@ function isPalindrome(string) {
 isPalindrome('topot');
 
 
+//Функция, которая принимает строку, извлекает содержащиеся в ней цифры от 0 до 9
+
+let extractNumber = function (string) {
+
+  let newStr = string.replace(/\D/g,'');
+
+  if (newStr > 0) {
+  newStr = Number(newStr);
+  console.log(newStr);
+  } else {
+    console.log(NaN);
+    };
+  }
+  extractNumber('1 кефир, 0.5 батона');
+
+
+
 //Функция, которая принимает три параметра исходную (строку, мин длину и строку с добавочными симв)
 var myPad = (source, count, addition) => {
   if (source.length >= count) {

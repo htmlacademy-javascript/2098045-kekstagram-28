@@ -10,12 +10,12 @@ stringLenth('проверяемая строка', 10);
 //Функция для проверки, является ли строка палиндромом
 function isPalindrome(string) {
   string = string.toLowerCase();
-  const wordArray = [...string];
-  const newArray = [];
-  wordArray.forEach(index => {
-    newArray.unshift(index);
+  const symbols = [...string];
+  const newSymbols = [];
+  symbols.forEach(index => {
+    newSymbols.unshift(index);
   });
-  const reversedString = newArray.join('');
+  const reversedString = newSymbols.join('');
   return string === reversedString;
 }
 isPalindrome('topot');
@@ -25,26 +25,22 @@ let extractNumber = function (string) {
   let newStr = string.replace(/\D/g,'');
   if (newStr > 0) {
   newStr = Number(newStr);
-  console.log(newStr);
+  return newStr;
   } else {
-    console.log(NaN);
+    return NaN;
     };
   }
   extractNumber('1 кефир, 0.5 батона');
 
 //Функция, которая принимает три параметра исходную (строку, мин длину и строку с добавочными симв)
-var myPad = (source, count, addition) => {
-  if (source.length >= count) {
-    return source;
-  }
-  const preffixLength = count - source.length;
-	const sample = addition;
+const myPad = (string, minLength, addition) => {
+  const actualPad = minLength - string.length;
 
-  while (addition.length < preffixLength - sample.length) {
-    addition += addition;
+  if (actualPad <= 0) {
+    return string;
   }
 
-  return  sample.slice(0, preffixLength - addition.length ) + addition + source;
-};
+  return pad.slice(0, myPad % pad.length) + pad.repeat(myPad / pad.length ) + string;
+}
 
 myPad('qwerty', 4, '0');

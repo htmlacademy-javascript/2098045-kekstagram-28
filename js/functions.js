@@ -1,24 +1,23 @@
 // Длина строки
-const stringLenth = function (boolean, number) {
-  return boolean.length <= number;
-};
+const stringLenth = (boolean, number) => boolean.length <= number;
 stringLenth('проверяемая строка', 10);
 
 //Функция для проверки, является ли строка палиндромом
-function isPalindrome(string) {
-  string = string.toLowerCase();
-  const symbols = [...string];
-  const newSymbols = [];
-  symbols.forEach((element)=> {
-    newSymbols.unshift(element);
-  });
-  const reversedString = newSymbols.join('');
-  return string === reversedString;
-}
-isPalindrome('topot');
+const isPalindrome = (string) => {
+  const tempString = string
+    .toLowerCase()
+    .replaceAll(' ', '');
+
+  let reverseString = '';
+  for (let i = tempString.length - 1; i >= 0; i--) {
+    reverseString += tempString.at(i);
+  }
+  return tempString === reverseString;
+};
+isPalindrome('топот');
 
 //Функция, которая принимает строку, извлекает содержащиеся в ней цифры от 0 до 9
-const extractNumber = function (string) {
+const extractNumber = (string) => {
   let newStr = string.replace(/\D/g,'');
   if (newStr > 0) {
     newStr = Number(newStr);

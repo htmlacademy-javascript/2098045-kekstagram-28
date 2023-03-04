@@ -33,7 +33,9 @@ const COMMENTS = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
-const NAMES = ['David', 'Mark', 'Sandy', 'Mary', 'Lola', 'Kevin'];
+const NAMES = ['Галелей', 'Юлий', 'Федор', 'Исаак', 'Аристотель', 'Платон'];
+const AVATAR_COUNT = 6;
+
 
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -58,19 +60,23 @@ function createRandomIdFromRangeGenerator (min, max) {
   };
 }
 const generatePhotoId = createRandomIdFromRangeGenerator(1, 25);
-const generateLikesNumber = createRandomIdFromRangeGenerator(15, 200);
 const generatePictureNumber = createRandomIdFromRangeGenerator(1, 25);
-const generateAvatar = createRandomIdFromRangeGenerator(1, 6);
+const generateCommentId = createRandomIdFromRangeGenerator(1, 25);
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 const createNewPhoto = () => ({
-  name: getRandomArrayElement(NAMES),
-  id: getRandomArrayElement(generatePhotoId),
-  avatar: getRandomArrayElement(generateAvatar),
-  url: getRandomArrayElement(generatePictureNumber),
+  id: generatePhotoId(),
+  url: `photos/${generatePictureNumber()}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
-  comment: getRandomArrayElement(COMMENTS),
-  like: getRandomArrayElement(generateLikesNumber),
+  likes: getRandomInteger(15, 200),
 });
-console.log(createNewPhoto);
+console.log(createNewPhoto());
+
+const createComment = () => ({
+  id: generateCommentId(),
+  avatar: `img/avatar-${getRandomInteger(1, AVATAR_COUNT)}.svg`,
+  message: getRandomArrayElement(COMMENTS),
+  name: getRandomArrayElement(NAMES)
+});
+console.log(createComment());

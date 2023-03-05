@@ -70,8 +70,9 @@ const createNewPhoto = () => ({
   url: `photos/${generatePictureNumber()}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomInteger(15, 200),
+  comments: getRandomArrayElement(COMMENTS),
 });
-console.log(createNewPhoto());
+createNewPhoto();
 
 const createComment = () => ({
   id: generateCommentId(),
@@ -79,4 +80,4 @@ const createComment = () => ({
   message: getRandomArrayElement(COMMENTS),
   name: getRandomArrayElement(NAMES)
 });
-console.log(createComment());
+createComment();

@@ -65,19 +65,18 @@ const generateCommentId = createRandomIdFromRangeGenerator(1, 25);
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-const createNewPhoto = () => ({
-  id: generatePhotoId(),
-  url: `photos/${generatePictureNumber()}.jpg`,
-  description: getRandomArrayElement(DESCRIPTIONS),
-  likes: getRandomInteger(15, 200),
-  comments: getRandomArrayElement(COMMENTS),
-});
-createNewPhoto();
-
 const createComment = () => ({
   id: generateCommentId(),
   avatar: `img/avatar-${getRandomInteger(1, AVATAR_COUNT)}.svg`,
   message: getRandomArrayElement(COMMENTS),
   name: getRandomArrayElement(NAMES)
 });
-createComment();
+
+const createNewPhoto = () => ({
+  id: generatePhotoId(),
+  url: `photos/${generatePictureNumber()}.jpg`,
+  description: getRandomArrayElement(DESCRIPTIONS),
+  likes: getRandomInteger(15, 200),
+  comments: createComment(),
+});
+createNewPhoto();

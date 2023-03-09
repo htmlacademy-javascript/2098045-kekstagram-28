@@ -1,8 +1,10 @@
-import {getRandomArrayElement} from './util.js';
-import {generatePhotoId} from './util.js';
-import {generatePictureNumber} from './util.js';
-import {generateCommentId} from './util.js';
-import {getRandomInteger} from './util.js';
+import {
+  getRandomArrayElement,
+  generatePhotoId,
+  generatePictureNumber,
+  generateCommentId,
+  getRandomInteger
+} from './util.js';
 
 const DESCRIPTIONS = [
   'Лето оно такое',

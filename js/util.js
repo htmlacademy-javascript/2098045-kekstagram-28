@@ -31,5 +31,6 @@ export {
   getRandomArrayElement,
   generatePhotoId,
   generatePictureNumber,
-  generateCommentId
+  generateCommentId,
+  getRandomInteger,
 };

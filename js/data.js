@@ -60,4 +60,6 @@ const createNewPhoto = () => ({
   comments:  Array.from({length: getRandomInteger(1, 10)}, createComment),
 });
 
-export {createNewPhoto};
+const createNewPhotos = (count) => Array.from({length: count},createNewPhoto);
+
+export {createNewPhotos};

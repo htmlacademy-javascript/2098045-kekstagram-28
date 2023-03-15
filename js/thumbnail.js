@@ -1,27 +1,27 @@
-import {createNewPhoto} from './util.js';
+import {createNewPhotos} from './data';
 
-//нашла место для размещения фото и шаблон
-const pictureContainer = document.querySelector('.picture');
+//нашла место для размещения фото и шаблон с содержимым
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+const pictureContainer = document.querySelector('.pictures');
 
+//кол-воо фотографий
+const createThumbnails = createNewPhotos(25);
 
-const createThumbnail = createNewPhoto();
-
+//создаю временный ящик
 const pictureContainerFragment = document.createDocumentFragment();
 
-//Нашла и склонировала шаблон, записала в него данные
-createThumbnail.forEach(({url, description, comments, likes}) => {
-  const pictureElement = pictureTemplate.cloneNode(true);
+//клонирую найденный шаблон и в нем создаю миниатюры
+createThumbnails.forEach (({url, description, comments, likes}) => {
+  const thumbnail = pictureTemplate.cloneNode(true);
 
-  pictureElement.querySelector('.picture__img').src = url;
-  pictureElement.querySelector('.picture__img').alt = description;
-  pictureElement.querySelector('.picture__comments').textContent = comments;
-  pictureElement.querySelector('.picture__likes').textContent = likes;
+  thumbnail.querySelector('.picture__img').src = url;
+  thumbnail.querySelector('.picture__img').alt = description;
+  thumbnail.querySelector('.picture__comments').textContent = comments;
+  thumbnail.querySelector('.picture__likes').textContent = likes;
 
-  pictureContainerFragment.appendChild(pictureElement);
+  pictureContainer.append(thumbnail);
 });
 
 pictureContainer.append(pictureContainerFragment);
 
-
-export {createThumbnail};
+export {createThumbnails};

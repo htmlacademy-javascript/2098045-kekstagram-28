@@ -4,7 +4,7 @@ import {createNewPhotos} from './data';
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const pictureContainer = document.querySelector('.pictures');
 
-//кол-воо фотографий
+//кол-во фотографий
 const createThumbnails = createNewPhotos(25);
 
 //создаю временный ящик

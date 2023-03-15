@@ -1,4 +1,4 @@
-import {createNewPhotos} from './data';
+import {createNewPhotos} from './data.js';
 
 //нашла место для размещения фото и шаблон с содержимым
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
@@ -24,4 +24,3 @@ createThumbnails.forEach (({url, description, comments, likes}) => {
 
 pictureContainer.append(pictureContainerFragment);
 
-export {createThumbnails};

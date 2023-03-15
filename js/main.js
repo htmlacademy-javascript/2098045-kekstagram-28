@@ -1,3 +1,2 @@
-import {createNewPhoto} from './data.js';
+import './thumbnail.js';
 
-createNewPhoto();

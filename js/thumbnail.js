@@ -11,13 +11,14 @@ const thumbnailElement = createNewPhotos(25);
 const pictureContainerFragment = document.createDocumentFragment();
 
 //клонирую найденный шаблон и в нем создаю миниатюры
-thumbnailElement.forEach (({url, description, comments, likes}) => {
+thumbnailElement.forEach (({url, description, comments, likes, id}) => {
   const thumbnail = pictureTemplate.cloneNode(true);
 
   thumbnail.querySelector('.picture__img').src = url;
   thumbnail.querySelector('.picture__img').alt = description;
   thumbnail.querySelector('.picture__comments').textContent = comments.length;
   thumbnail.querySelector('.picture__likes').textContent = likes;
+  thumbnail.dataset.id = id;
 
   pictureContainer.append(thumbnail);
 });

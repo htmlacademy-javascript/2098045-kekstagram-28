@@ -23,9 +23,11 @@ function createRandomIdFromRangeGenerator (min, max) {
     return currentValue;
   };
 }
+
 const generatePhotoId = createRandomIdFromRangeGenerator(1, 25);
 const generatePictureNumber = createRandomIdFromRangeGenerator(1, 25);
 const generateCommentId = createRandomIdFromRangeGenerator(1, 25);
+
 
 export {
   getRandomArrayElement,

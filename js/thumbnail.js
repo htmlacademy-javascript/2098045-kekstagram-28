@@ -11,7 +11,7 @@ const thumbnailElement = createNewPhotos(25);
 const pictureContainerFragment = document.createDocumentFragment();
 
 //клонирую найденный шаблон и в нем создаю миниатюры
-function makeThumbnailElement(picture) {
+function createThumbnai(picture) {
   picture.forEach (({url, description, comments, likes, id}) => {
     const thumbnail = pictureTemplate.cloneNode(true);
 
@@ -25,8 +25,8 @@ function makeThumbnailElement(picture) {
 
   });
 }
-makeThumbnailElement(thumbnailElement);
+createThumbnai(thumbnailElement);
 
 pictureContainer.append(pictureContainerFragment);
 
-export {makeThumbnailElement};
+export {createThumbnai};

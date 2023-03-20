@@ -1,5 +1,5 @@
-import {makeThumbnailElement} from './thumbnail.js';
-makeThumbnailElement();
+import {createThumbnai} from './thumbnail.js';
+createThumbnai();
 
 import { renderGallery } from './gallery.js';
 renderGallery();

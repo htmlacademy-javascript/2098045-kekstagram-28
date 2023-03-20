@@ -1,4 +1,4 @@
-import {makeThumbnailElement} from './thumbnail.js';
+import {createThumbnai} from './thumbnail.js';
 
 const bigPictureContainer = document.querySelector('.big-picture');
 const bigPictureCansel = document.querySelector('.big-picture__cancel');
@@ -23,24 +23,30 @@ document.addEventListener('keydown', (evt) => {
 });
 
 //кол-во фотографий
-const bigPicrureElements = makeThumbnailElement;
+const bigPicrureElements = createThumbnai;
 
 //создаю временный ящик
 const bigPictureContainerFragment = document.createDocumentFragment();
 
-bigPicrureElements.forEach (({url, description, comments, likes, id}) => {
-  const bigPicture = bigPictureTemplate.cloneNode(true);
+function showBigPicture (elements) {
+  elements.forEach (({url, description, comments, likes, id}) => {
+    const bigPicture = bigPictureTemplate.cloneNode(true);
 
-  bigPicture.querySelector('.picture__img').src = url;
-  bigPicture.querySelector('.picture__img').alt = description;
-  bigPicture.querySelector('.picture__comments').textContent = comments.length;
-  bigPicture.querySelector('.picture__likes').textContent = likes;
-  bigPicture.dataset.id = id;
+    bigPicture.querySelector('.picture__img').src = url;
+    bigPicture.querySelector('.picture__img').alt = description;
+    bigPicture.querySelector('.picture__comments').textContent = comments.length;
+    bigPicture.querySelector('.picture__likes').textContent = likes;
+    bigPicture.dataset.id = id;
 
-  bigPictureOpen.append(bigPicture);
-});
+    bigPictureOpen.append(bigPicture);
+  });
+}
+showBigPicture (bigPicrureElements);
+
 
 bigPictureOpen.append(bigPictureContainerFragment);
+
+export {showBigPicture};
 /*
 const container = document.querySelector('.pictures');
 

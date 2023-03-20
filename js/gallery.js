@@ -1,20 +1,18 @@
 import './big-picture.js';
 import './thumbnail.js';
 
-const bigPicture = document.querySelector('.big-picture').querySelector('img');
 const container = document.querySelector('pictures');
 
-const renderGallery = () => {
+const renderGallery = (pictures) => {
   container.addEventListener('click', (evt) => {
-    const thumbnail = evt.target.closet('.picture');
+    const thumbnail = evt.target.closet('[data-id]');
     if(!thumbnail) {
       return;
     }
-    const picture = thumbnail.find((bigPictureTemplate) =>bigPictureTemplate.id === Number(thumbnail.dataset.id));
-    bigPicture.src = picture.url;
-    thumbnail(picture);
-  });
+    const picture = pictures.find ((item) => item.id === +thumbnail.dataset.id);
 
+  });
+  bigPicrureElements(picture);
 };
 
 export{renderGallery};

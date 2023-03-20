@@ -1,4 +1,4 @@
-import './thumbnail.js';
+import {makeThumbnailElement} from './thumbnail.js';
 
 const bigPictureContainer = document.querySelector('.big-picture');
 const bigPictureCansel = document.querySelector('.big-picture__cancel');
@@ -23,7 +23,7 @@ document.addEventListener('keydown', (evt) => {
 });
 
 //кол-во фотографий
-const bigPicrureElements = thumbnailElement;
+const bigPicrureElements = makeThumbnailElement;
 
 //создаю временный ящик
 const bigPictureContainerFragment = document.createDocumentFragment();

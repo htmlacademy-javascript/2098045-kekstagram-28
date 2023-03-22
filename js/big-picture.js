@@ -5,12 +5,16 @@ const bigPictureImg = document.querySelector('.big-picture__img img');
 const bigPictureDescription = document.querySelector('.social__caption');
 const bigPictureLikes = document.querySelector('.likes-count');
 const bigPictureComments = document.querySelector('.comments-count');
-const commentTemplate = document.querySelector('.social__comments');
+const commentContainer = document.querySelector('.social__comments');
 const commentItem = document.querySelector('.social__comment');
+const pageBody = document.body;
+
 
 bigPictureCansel.addEventListener('click', () => {
   bigPictureContainer.classList.add('hidden');
+  pageBody.classList.remove('modal-open');
 });
+
 //закрытие большой картинки при нажатии кнопки esc
 document.addEventListener('keydown', (evt) => {
   if(evt.key === 'Escape') {
@@ -31,7 +35,7 @@ function showBigPicture ({url, description, comments, likes}) {
 function createComments (information) {
   const commentsContainerFragment = document.createDocumentFragment();
 
-  commentTemplate.innerHTML = '';
+  commentContainer.innerHTML = '';
 
   information.forEach (({avatar, description, message}) => {
     const newComment = commentItem.cloneNode(true);
@@ -39,9 +43,11 @@ function createComments (information) {
     newComment.querySelector('.social__picture').src = avatar;
     newComment.querySelector('.social__picture').alt = description;
     newComment.querySelector('.social__text').textContent = message;
-    commentTemplate.append(newComment);
+
+    commentsContainerFragment.append(newComment);
   });
-  commentTemplate.append(commentsContainerFragment);
+
+  commentContainer.append(commentsContainerFragment);
 }
 
 export {showBigPicture, createComments};

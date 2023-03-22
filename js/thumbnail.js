@@ -19,7 +19,7 @@ function createThumbnais(picture) {
     thumbnail.querySelector('.picture__likes').textContent = likes;
     thumbnail.dataset.id = id;
 
-    pictureContainer.append(thumbnail);
+    pictureContainerFragment.append(thumbnail);
 
   });
   pictureContainer.append(pictureContainerFragment);

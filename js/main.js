@@ -1,6 +1,14 @@
-import {createThumbnai} from './thumbnail.js';
-createThumbnai();
-
+import {createThumbnais} from './thumbnail.js';
 import { renderGallery } from './gallery.js';
-renderGallery();
+import {createNewPhotos} from './data.js';
+
+// createThumbnai();
+// renderGallery();
+
+//кол-во (массив) фотографий
+const thumbnailElements = createNewPhotos(25);
+createThumbnais(thumbnailElements);
+
+renderGallery(thumbnailElements);
+
 

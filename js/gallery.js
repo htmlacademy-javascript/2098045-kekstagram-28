@@ -1,21 +1,18 @@
-import {showBigPicture} from './big-picture.js';
-showBigPicture();
+import {showBigPicture, createComments} from './big-picture.js';
 
-import {createThumbnai} from './thumbnail.js';
-createThumbnai();
-
-const container = document.querySelector('pictures');
+const container = document.querySelector('.pictures');
 
 const renderGallery = (pictures) => {
   container.addEventListener('click', (evt) => {
-    const thumbnail = evt.target.closet('[data-id]');
+    const thumbnail = evt.target.closest('[data-id]');
     if(!thumbnail) {
       return;
     }
-    const picture = pictures.find ((item) => item.id === +thumbnail.dataset.id);
-
+    const picture = pictures.find ((item) => item.id === Number(thumbnail.dataset.id));
+    showBigPicture(picture);
+    createComments(picture.comments);
   });
-  bigPicrureElements(picture);
+
 };
 
 export{renderGallery};

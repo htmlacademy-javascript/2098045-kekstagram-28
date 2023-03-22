@@ -1,17 +1,15 @@
-import {createNewPhotos} from './data.js';
-
 //нашла место для размещения фото и шаблон с содержимым
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const pictureContainer = document.querySelector('.pictures');
 
-//кол-во фотографий
-const thumbnailElement = createNewPhotos(25);
-
-//создаю временный ящик
-const pictureContainerFragment = document.createDocumentFragment();
 
 //клонирую найденный шаблон и в нем создаю миниатюры
-function createThumbnai(picture) {
+
+function createThumbnais(picture) {
+
+  //создаю временный ящик
+  const pictureContainerFragment = document.createDocumentFragment();
+
   picture.forEach (({url, description, comments, likes, id}) => {
     const thumbnail = pictureTemplate.cloneNode(true);
 
@@ -24,9 +22,7 @@ function createThumbnai(picture) {
     pictureContainer.append(thumbnail);
 
   });
+  pictureContainer.append(pictureContainerFragment);
 }
-createThumbnai(thumbnailElement);
 
-pictureContainer.append(pictureContainerFragment);
-
-export {createThumbnai};
+export {createThumbnais};

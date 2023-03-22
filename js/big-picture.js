@@ -1,15 +1,12 @@
-import {createThumbnai} from './thumbnail.js';
 
 const bigPictureContainer = document.querySelector('.big-picture');
 const bigPictureCansel = document.querySelector('.big-picture__cancel');
-const bigPictureOpen = document.querySelector('.pictures');
-const bigPictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-
-//открываю и закрываю большую картинку
-
-bigPictureOpen.addEventListener('click', () => {
-  bigPictureContainer.classList.remove('hidden');
-});
+const bigPictureImg = document.querySelector('.big-picture__img img');
+const bigPictureDescription = document.querySelector('.social__caption');
+const bigPictureLikes = document.querySelector('.likes-count');
+const bigPictureComments = document.querySelector('.comments-count');
+const commentTemplate = document.querySelector('.social__comments');
+const commentItem = document.querySelector('.social__comment');
 
 bigPictureCansel.addEventListener('click', () => {
   bigPictureContainer.classList.add('hidden');
@@ -22,46 +19,30 @@ document.addEventListener('keydown', (evt) => {
   }
 });
 
-//кол-во фотографий
-const bigPicrureElements = createThumbnai;
-
-//создаю временный ящик
-const bigPictureContainerFragment = document.createDocumentFragment();
-
-function showBigPicture (elements) {
-  elements.forEach (({url, description, comments, likes, id}) => {
-    const bigPicture = bigPictureTemplate.cloneNode(true);
-
-    bigPicture.querySelector('.picture__img').src = url;
-    bigPicture.querySelector('.picture__img').alt = description;
-    bigPicture.querySelector('.picture__comments').textContent = comments.length;
-    bigPicture.querySelector('.picture__likes').textContent = likes;
-    bigPicture.dataset.id = id;
-
-    bigPictureOpen.append(bigPicture);
-  });
+function showBigPicture ({url, description, comments, likes}) {
+  bigPictureContainer.classList.remove('hidden');
+  bigPictureImg.src = url;
+  bigPictureDescription.textContent = description;
+  bigPictureLikes.textContent = likes;
+  bigPictureComments.textContent = comments.length;
 }
-showBigPicture (bigPicrureElements);
 
+//Комментарии к большой картинке
+function createComments (information) {
+  const commentsContainerFragment = document.createDocumentFragment();
 
-bigPictureOpen.append(bigPictureContainerFragment);
+  commentTemplate.innerHTML = '';
 
-export {showBigPicture};
-/*
-const container = document.querySelector('.pictures');
+  information.forEach (({avatar, description, message}) => {
+    const newComment = commentItem.cloneNode(true);
 
-const renderGallery = (pictures) => {
-  container.addEventListener('click', evt => {
-    const thumbnail = evt.target.closest('[data-thumbnail-id]');
-    if(!thumbnail) {
-      return;
-    }
+    newComment.querySelector('.social__picture').src = avatar;
+    newComment.querySelector('.social__picture').alt = description;
+    newComment.querySelector('.social__text').textContent = message;
+    commentTemplate.append(newComment);
+  });
+  commentTemplate.append(commentsContainerFragment);
+}
 
-    const picture = pictures.find(
-       (item) => item.id === + thumbnail.dataset.thumbnailId
-    );
-
-
-  })
-};  */
+export {showBigPicture, createComments};
 

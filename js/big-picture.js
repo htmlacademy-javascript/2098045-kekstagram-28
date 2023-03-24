@@ -7,12 +7,16 @@ const bigPictureLikes = document.querySelector('.likes-count');
 const bigPictureComments = document.querySelector('.comments-count');
 const commentContainer = document.querySelector('.social__comments');
 const commentItem = document.querySelector('.social__comment');
-const pageBody = document.body;
+const COMMENTS_GROUP = 5;
+let commentsLoader = 0;
+const commentsLoaderButton = document.querySelector('.social__comments-loader ');
+const commentsCount = document.querySelector('.social__comment-count');
 
 
 bigPictureCansel.addEventListener('click', () => {
   bigPictureContainer.classList.add('hidden');
-  pageBody.classList.remove('modal-open');
+  document.body.classList.remove('modal-open');
+
 });
 
 //закрытие большой картинки при нажатии кнопки esc
@@ -50,5 +54,30 @@ function createComments (information) {
   commentContainer.append(commentsContainerFragment);
 }
 
-export {showBigPicture, createComments};
+//выгружаю нужное кол-во комментариев
+const renderComments = (commentsNumber) => {
+  if (commentsNumber.length <= COMMENTS_GROUP) {
+    createComments(commentsNumber);
+    commentsLoader = commentsNumber.length;
+    commentsLoaderButton.classList.add('hidden');
+  } else {
+    commentsLoaderButton.classList.remove('hidden');
+    createComments(commentsNumber.slice(commentsLoader, commentsLoader + COMMENTS_GROUP));
+    commentsLoader += COMMENTS_GROUP;
+  }
+  commentsLoaderButton.add.eventListener ('click', () => {
+    createComments(commentsNumber.slice(commentsLoader, commentsLoader + COMMENTS_GROUP));
+    commentsLoader += COMMENTS_GROUP;
+    if (commentsLoader >= commentsNumber.length) {
+      commentsLoader = commentsNumber.length;
+      commentsLoaderButton.classList.add('hidden');
+    }
+    commentsCount.innerHTML = `${commentsLoader} из <span class="comments-count">${commentsNumber.length} комментариев</span>`;
+  });
+  commentsCount.innerHTML = `${commentsLoader} из <span class="comments-count">${commentsNumber.length} комментариев</span>`;
+
+};
+
+
+export {showBigPicture, createComments, renderComments};
 

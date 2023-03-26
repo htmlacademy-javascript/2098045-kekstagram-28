@@ -16,6 +16,7 @@ const commentsCount = document.querySelector('.social__comment-count');
 bigPictureCansel.addEventListener('click', () => {
   bigPictureContainer.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  commentsLoader = 0;
 
 });
 
@@ -24,6 +25,8 @@ document.addEventListener('keydown', (evt) => {
   if(evt.key === 'Escape') {
     evt.preventDefault();
     bigPictureContainer.classList.add('hidden');
+    document.body.classList.remove('modal-open');
+    commentsLoader = 0;
   }
 });
 
@@ -55,26 +58,26 @@ function createComments (information) {
 }
 
 //выгружаю нужное кол-во комментариев
-const renderComments = (commentsNumber) => {
-  if (commentsNumber.length <= COMMENTS_GROUP) {
-    createComments(commentsNumber);
-    commentsLoader = commentsNumber.length;
+const renderComments = (comments) => {
+  if (comments.length <= COMMENTS_GROUP) {
+    createComments(comments);
+    commentsLoader = comments.length;
     commentsLoaderButton.classList.add('hidden');
   } else {
     commentsLoaderButton.classList.remove('hidden');
-    createComments(commentsNumber.slice(commentsLoader, commentsLoader + COMMENTS_GROUP));
+    createComments(comments.slice(0, COMMENTS_GROUP));
     commentsLoader += COMMENTS_GROUP;
   }
-  commentsLoaderButton.add.eventListener ('click', () => {
-    createComments(commentsNumber.slice(commentsLoader, commentsLoader + COMMENTS_GROUP));
+  commentsLoaderButton.addEventListener ('click', () => {
+    createComments(comments.slice(0, commentsLoader + COMMENTS_GROUP));
     commentsLoader += COMMENTS_GROUP;
-    if (commentsLoader >= commentsNumber.length) {
-      commentsLoader = commentsNumber.length;
+    if (commentsLoader >= comments.length) {
+      commentsLoader = comments.length;
       commentsLoaderButton.classList.add('hidden');
     }
-    commentsCount.innerHTML = `${commentsLoader} из <span class="comments-count">${commentsNumber.length} комментариев</span>`;
+    commentsCount.innerHTML = `${commentsLoader} из <span class="comments-count">${comments.length} комментариев</span>`;
   });
-  commentsCount.innerHTML = `${commentsLoader} из <span class="comments-count">${commentsNumber.length} комментариев</span>`;
+  commentsCount.innerHTML = `${commentsLoader} из <span class="comments-count">${comments.length} комментариев</span>`;
 
 };
 

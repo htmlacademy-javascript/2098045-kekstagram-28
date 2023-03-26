@@ -1,4 +1,4 @@
-import {showBigPicture, createComments} from './big-picture.js';
+import {showBigPicture, renderComments} from './big-picture.js';
 
 const container = document.querySelector('.pictures');
 
@@ -12,7 +12,7 @@ const renderGallery = (pictures) => {
     document.body.classList.add('modal-open');
 
     showBigPicture(picture);
-    createComments(picture.comments);
+    renderComments(picture.comments);
   });
 
 };

@@ -27,7 +27,7 @@ const showModal = () => {
 const hideModal = () => {
   document.form.reset();
   pristine.reset();
-  overlay.classList.add('.hidden');
+  imageOverlay.classList.add('.hidden');
   document.body.classList.remove('.modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
 };

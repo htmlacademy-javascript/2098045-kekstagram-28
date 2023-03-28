@@ -2,6 +2,7 @@ import {createThumbnais} from './thumbnail.js';
 import { renderGallery } from './gallery.js';
 import {createNewPhotos} from './data.js';
 
+
 // createThumbnai();
 // renderGallery();
 

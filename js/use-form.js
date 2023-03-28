@@ -81,3 +81,6 @@ const onFormSubmit = (evt) => {
 imageFileField.addEventListener('change', onFileInputChange);
 imageUploadCansel.addEventListener('click', onCancelButtonClick);
 imageUploadForm.addEventListener('submit', onFormSubmit);
+
+
+export {showModal, hideModal, onFileInputChange, onFormSubmit};

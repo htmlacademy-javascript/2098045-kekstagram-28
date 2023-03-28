@@ -1,4 +1,4 @@
-const overlay = document.querySelector('.img-upload__overlay');
+const imageOverlay = document.querySelector('.img-upload__overlay');
 const hashtagField = document.querySelector('.text__hashtags');
 const commentField = document.querySelector('.text__description');
 
@@ -19,7 +19,7 @@ const pristine = new Pristine(pictureForm, {
 });
 
 const showModal = () => {
-  overlay.classList.remove('.hidden');
+  imageOverlay.classList.remove('.hidden');
   document.body.classList.add('.modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
 };

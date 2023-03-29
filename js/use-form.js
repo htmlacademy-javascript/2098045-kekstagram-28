@@ -1,5 +1,5 @@
 import {resetScale} from './scale.js';
-import {resetEffects} from './effect.js';
+// import {resetEffects} from './effect.js';
 
 
 const imageOverlay = document.querySelector('.img-upload__overlay');

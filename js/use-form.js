@@ -80,7 +80,7 @@ pristine.addValidator(
 //   'Ввели не правильное значение'
 // );
 
-
+//отправка на сервер
 const onFormSubmit = (evt) => {
   evt.preventDefault();
   pristine.validate();

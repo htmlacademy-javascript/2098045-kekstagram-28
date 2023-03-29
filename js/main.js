@@ -12,5 +12,3 @@ const thumbnailElements = createNewPhotos(25);
 createThumbnais(thumbnailElements);
 
 renderGallery(thumbnailElements);
-
-

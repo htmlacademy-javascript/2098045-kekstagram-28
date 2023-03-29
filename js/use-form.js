@@ -1,4 +1,6 @@
 import {resetScale} from './scale.js';
+import {resetEffects} from './effect.js';
+
 
 const imageOverlay = document.querySelector('.img-upload__overlay');
 const hashtagField = document.querySelector('.text__hashtags');
@@ -29,6 +31,7 @@ const showModal = () => {
 const hideModal = () => {
   pictureForm.reset();
   resetScale();
+  resetEffects();
   pristine.reset();
   imageOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');

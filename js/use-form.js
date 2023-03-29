@@ -2,12 +2,12 @@ const imageOverlay = document.querySelector('.img-upload__overlay');
 const hashtagField = document.querySelector('.text__hashtags');
 const commentField = document.querySelector('.text__description');
 
-const imageFileField = document.querySelector('.img-upload__label');
-const imageUploadForm = document.querySelector('.img-upload__form');
-const imageUploadCansel = document.querySelector('.img-upload__cancel');
+const imageFileField = document.querySelector('.img-upload__input');
+const imageUploadCancel = document.querySelector('.img-upload__cancel');
 
 const pictureForm = document.querySelector('.img-upload__form');
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
+const TAG_ARROR_TEXT = 'Ввели не правильное значение';
 const MAX_HASHTAG_COUNT = 20;
 new Pristine(pictureForm);
 
@@ -19,16 +19,16 @@ const pristine = new Pristine(pictureForm, {
 });
 
 const showModal = () => {
-  imageOverlay.classList.remove('.hidden');
-  document.body.classList.add('.modal-open');
+  imageOverlay.classList.remove('hidden');
+  document.body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
 const hideModal = () => {
-  document.form.reset();
+  pictureForm.reset();
   pristine.reset();
-  imageOverlay.classList.add('.hidden');
-  document.body.classList.remove('.modal-open');
+  imageOverlay.classList.add('hidden');
+  document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
@@ -64,14 +64,22 @@ const hasUnicTags = (tags) => {
 };
 
 const validateTags = (value) => {
-  const tags = value.trim().split(' ').filter((tag) => tag.trim().length);
-  return hasValidCount(tags) && hasUnicTags(tags) && tags.every(isValidTag);
+  const hashtags = value.trim().split(' ').filter((tag) => tag.trim().length);
+  return hasValidCount(hashtags) && hasUnicTags(hashtags) && hashtags.every(isValidTag);
 };
 
 pristine.addValidator(
   hashtagField,
-  validateTags
+  validateTags,
+  TAG_ARROR_TEXT
 );
+
+// pristine.addValidator(
+//   pictureForm.hashtagField,
+//   validateTags,
+//   'Ввели не правильное значение'
+// );
+
 
 const onFormSubmit = (evt) => {
   evt.preventDefault();
@@ -79,8 +87,8 @@ const onFormSubmit = (evt) => {
 };
 
 imageFileField.addEventListener('change', onFileInputChange);
-imageUploadCansel.addEventListener('click', onCancelButtonClick);
-imageUploadForm.addEventListener('submit', onFormSubmit);
+imageUploadCancel.addEventListener('click', onCancelButtonClick);
+pictureForm.addEventListener('submit', onFormSubmit);
 
 
 export {showModal, hideModal, onFileInputChange, onFormSubmit};

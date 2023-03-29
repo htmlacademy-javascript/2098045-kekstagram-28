@@ -1,6 +1,7 @@
 import {createThumbnais} from './thumbnail.js';
 import { renderGallery } from './gallery.js';
 import {createNewPhotos} from './data.js';
+import './use-form.js';
 
 
 // createThumbnai();

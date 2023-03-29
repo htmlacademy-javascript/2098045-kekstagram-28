@@ -13,7 +13,6 @@ const pictureForm = document.querySelector('.img-upload__form');
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const TAG_ARROR_TEXT = 'Ввели не правильное значение';
 const MAX_HASHTAG_COUNT = 20;
-new Pristine(pictureForm);
 
 //добавляю вывод ошибок
 const pristine = new Pristine(pictureForm, {
@@ -31,7 +30,7 @@ const showModal = () => {
 const hideModal = () => {
   pictureForm.reset();
   resetScale();
-  resetEffects();
+  // resetEffects();
   pristine.reset();
   imageOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');

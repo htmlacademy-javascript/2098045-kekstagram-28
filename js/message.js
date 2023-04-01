@@ -6,6 +6,8 @@ const successButton = document.querrySelector('.success__button');
 const succsessContainer = document.createElement('div');
 succsessContainer.classList.add ('success-messages');
 
+
+//клонирую шаблон
 function showSuccsessMessage (message) {
   const messageContainerFragment = document.createDocumentFragment();
   message(({title, button}) => {

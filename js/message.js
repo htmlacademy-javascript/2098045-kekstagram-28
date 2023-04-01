@@ -1,6 +1,6 @@
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
-const successButton = document.querrySelector('.success__button');
+const successButton = document.querySelector('.success__button');
 
 //сообщение об успешном отправлении
 const succsessContainer = document.createElement('div');
@@ -10,7 +10,7 @@ succsessContainer.classList.add ('success-messages');
 //клонирую шаблон
 function showSuccsessMessage (message) {
   const messageContainerFragment = document.createDocumentFragment();
-  message(({title, button}) => {
+  message.forEach (({title, button}) => {
     const newMessage = successTemplate.cloneNode(true);
 
     newMessage.querySelector('.success__title').textContent = title;
@@ -24,7 +24,7 @@ function showSuccsessMessage (message) {
 
 
 //закрытие всплывающего сообщения при клике и  нажатии кнопки esc
-successButton.addEventListener('onclick', () => {
+successButton.addEventListener('click', () => {
   succsessContainer.classList.add('hidden');
 });
 

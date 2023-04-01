@@ -11,8 +11,14 @@ const imageUploadCancel = document.querySelector('.img-upload__cancel');
 
 const pictureForm = document.querySelector('.img-upload__form');
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
-const TAG_ARROR_TEXT = 'Ввели не правильное значение';
+const TAG_ERROR_TEXT = 'Ввели не правильное значение';
 const MAX_HASHTAG_COUNT = 20;
+
+const submitButton = document.querySelector('.img-upload__submit');
+const SubmitButtonText = {
+  IDLE: 'Сохранить',
+  SENDING: 'Сохраняю...'
+};
 
 //добавляю вывод ошибок
 const pristine = new Pristine(pictureForm, {
@@ -20,6 +26,16 @@ const pristine = new Pristine(pictureForm, {
   errorTextParent: 'img-upload__field-wrapper',
   errorTextClass: 'img-upload__field-wrapper--text',
 });
+
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = SubmitButtonText.SENDING;
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = SubmitButtonText.IDLE;
+};
 
 const showModal = () => {
   imageOverlay.classList.remove('hidden');
@@ -76,24 +92,28 @@ const validateTags = (value) => {
 pristine.addValidator(
   hashtagField,
   validateTags,
-  TAG_ARROR_TEXT
+  TAG_ERROR_TEXT
 );
 
-// pristine.addValidator(
-//   pictureForm.hashtagField,
-//   validateTags,
-//   'Ввели не правильное значение'
-// );
 
 //отправка на сервер
-const onFormSubmit = (evt) => {
-  evt.preventDefault();
-  pristine.validate();
+const setOnFormSubmit = (cb) => {
+  pictureForm.addEventListener('submit', async(evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate();
+
+    if(isValid) {
+      blockSubmitButton();
+      await cb(new FormData(pictureForm));
+      unblockSubmitButton();
+    }
+  });
+
 };
 
 imageFileField.addEventListener('change', onFileInputChange);
 imageUploadCancel.addEventListener('click', onCancelButtonClick);
-pictureForm.addEventListener('submit', onFormSubmit);
+pictureForm.addEventListener('submit', setOnFormSubmit);
 
 
-export {showModal, hideModal, onFileInputChange};
+export {showModal, hideModal, onFileInputChange, setOnFormSubmit};

@@ -1,58 +1,33 @@
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
-const successButton = document.querySelector('.success__button');
-
-//сообщение об успешном отправлении
-const succsessContainer = document.createElement('div');
-succsessContainer.classList.add ('success-messages');
-
+const successMessage = successTemplate.cloneNode(true);
+const errorMessage = errorTemplate.cloneNode(true);
 
 //клонирую шаблон
-function showSuccsessMessage (message) {
-  const messageContainerFragment = document.createDocumentFragment();
-  message.forEach (({title, button}) => {
-    const newMessage = successTemplate.cloneNode(true);
-
-    newMessage.querySelector('.success__title').textContent = title;
-    newMessage.querySelector('.success__button').textContent = button;
-
-    messageContainerFragment.append(newMessage);
-  });
-
-  succsessContainer.append(messageContainerFragment);
-}
+const showSuccsessMessage = () => {
+  document.body.append(successMessage);
+};
 
 
 //закрытие всплывающего сообщения при клике и  нажатии кнопки esc
+// const successContainer = successMessage.querySelector('.success__inner');
+
+const successButton = successMessage.querySelector('.success__button');
 successButton.addEventListener('click', () => {
-  succsessContainer.classList.add('hidden');
+  successMessage.classList.add('hidden');
 });
 
-document.addEventListener('keydown', (evt) => {
-  if(evt.key === 'Escape') {
-    evt.preventDefault();
-    succsessContainer.classList.add('hidden');
-  }
-});
 
 //сообщение об ошибке в отправлении
-const errorContainer = document.createElement('section');
-errorContainer.classList.add ('error-messages');
+const showErrorMessage = () => {
+  document.body.append(errorMessage);
+};
 
-function showErrorMessage (message) {
-  const messageContainerFragment = document.createDocumentFragment();
 
-  message.forEach(({title, button}) => {
-    const newMessage = errorTemplate.cloneNode(true);
-
-    newMessage.querySelector('.error__title').textContent = title;
-    newMessage.querySelector('.error__button').textContent = button;
-
-    messageContainerFragment.append(newMessage);
-  });
-
-  errorContainer.append(messageContainerFragment);
-}
+const errorButton = errorMessage.querySelector('.error__button');
+errorButton.addEventListener('click', () => {
+  errorMessage.classList.add('hidden');
+});
 
 
 export {showSuccsessMessage, showErrorMessage};

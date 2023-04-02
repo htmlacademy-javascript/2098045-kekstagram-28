@@ -108,12 +108,10 @@ const setOnFormSubmit = (cb) => {
       unblockSubmitButton();
     }
   });
-
 };
 
 imageFileField.addEventListener('change', onFileInputChange);
 imageUploadCancel.addEventListener('click', onCancelButtonClick);
-pictureForm.addEventListener('submit', setOnFormSubmit);
 
 
 export {showModal, hideModal, onFileInputChange, setOnFormSubmit};

@@ -40,7 +40,7 @@ const unblockSubmitButton = () => {
 const showModal = () => {
   imageOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown);
+  document.body.addEventListener('keydown', onDocumentKeydown);
 };
 
 const hideModal = () => {
@@ -50,8 +50,9 @@ const hideModal = () => {
   pristine.reset();
   imageOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onDocumentKeydown);
+  document.body.removeEventListener('keydown', onDocumentKeydown);
 };
+
 
 //при фокусировке окно не закрывается
 const isTextFieldFocused = () =>
@@ -59,7 +60,7 @@ const isTextFieldFocused = () =>
   document.activeElement === commentField;
 
 function onDocumentKeydown(evt) {
-  if (evt.key === 'Escape' && !isTextFieldFocused()) {
+  if (evt.key === 'Escape' && !isTextFieldFocused() && !document.querySelector('.error')) {
     evt.preventDefault();
     hideModal();
   }
@@ -73,6 +74,7 @@ const onCancelButtonClick = () => {
 const onFileInputChange = () => {
   showModal();
 };
+
 
 //добавляю валидность формы
 const isValidTag = (tag) => VALID_SYMBOLS.test(tag);

@@ -3,6 +3,33 @@ const errorTemplate = document.querySelector('#error').content.querySelector('.e
 const successMessage = successTemplate.cloneNode(true);
 const errorMessage = errorTemplate.cloneNode(true);
 
+const successInner = successMessage.querySelector('.success__inner');
+const errorInner = errorMessage.querySelector('.error__inner');
+
+
+successMessage.addEventListener('click', () => {
+  successMessage.remove();
+});
+
+errorMessage.addEventListener('click', () => {
+  errorMessage.remove();
+});
+
+successInner.addEventListener('click', (evt) => {
+  evt.stopPropagation();
+});
+
+errorInner.addEventListener('click', (evt) => {
+  evt.stopPropagation();
+});
+
+document.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape') {
+    successMessage.remove();
+    errorMessage.remove();
+  }
+});
+
 //клонирую шаблон
 const showSuccsessMessage = () => {
   document.body.append(successMessage);

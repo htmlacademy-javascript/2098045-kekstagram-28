@@ -6,6 +6,7 @@ import { getData, sendData } from './api.js';
 import { showAlert } from './alert.js';
 import { setOnFormSubmit, hideModal } from './use-form.js';
 import { showSuccsessMessage, showErrorMessage } from './message.js';
+import { init, getFilteredPictures } from './filter.js';
 
 
 // createThumbnai();
@@ -30,7 +31,9 @@ setOnFormSubmit(async (data) => {
 
 try {
   const data = await getData();
-  renderGallery(data);
+  const debouncedRenderGallery = debounce(renderGallery);
+  init(data, debouncedRenderGallery);
+  renderGallery(getFilteredPictures());
 } catch (err) {
   showAlert(err.message);
 }

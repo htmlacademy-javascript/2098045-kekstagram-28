@@ -2,7 +2,10 @@ import {showBigPicture, renderComments} from './big-picture.js';
 
 const container = document.querySelector('.pictures');
 
-const renderGallery = (pictures) => {
+let pictures = [];
+
+const renderGallery = (currentPictures) => {
+  pictures = currentPictures;
   container.addEventListener('click', (evt) => {
     const thumbnail = evt.target.closest('[data-id]');
     if(!thumbnail) {

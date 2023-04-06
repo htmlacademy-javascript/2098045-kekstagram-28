@@ -1,8 +1,28 @@
 import {showBigPicture, renderComments} from './big-picture.js';
+import { createThumbnails } from './thumbnail.js';
 
 const container = document.querySelector('.pictures');
 
 let pictures = [];
+
+// const onContainerClick = (evt) => {
+//   const thumbnail = evt.target.closest('[data-thumbnail-id]');
+//   if (!thumbnail) {
+//     return;
+//   }
+
+//   evt.preventDefault();
+//   const picture = pictures.find(
+//     (item) => item.id === +thumbnail.dataset.thumbnailId
+//   );
+//   showBigPicture(picture);
+// };
+
+// const renderGallery = (currentPictures) => {
+//   pictures = currentPictures;
+//   renderThumbnails(pictures, container);
+//   container.addEventListener('click', onContainerClick);
+// };
 
 const renderGallery = (currentPictures) => {
   pictures = currentPictures;
@@ -16,8 +36,8 @@ const renderGallery = (currentPictures) => {
 
     showBigPicture(picture);
     renderComments(picture.comments);
+    createThumbnails(pictures, container);
   });
-
 };
 
 export{renderGallery};

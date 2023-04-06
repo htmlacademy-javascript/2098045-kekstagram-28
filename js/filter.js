@@ -2,7 +2,7 @@ const PICTURES_COUNT = 10;
 const Filter = {
   DEFAULT: 'filter-default',
   RANDOM: 'filter-random',
-  DISCUSSED: 'filter-discussed'
+  DISCUSSED: 'filter-discussed',
 };
 
 const filterElement = document.querySelector('.img-filters');
@@ -23,7 +23,7 @@ const getFilteredPictures = () => {
     default:
       return [...pictures];
   }
-}
+};
 
 const setOnFilterClick = (callback) => {
   filterElement.addEventListener('click', (evt) => {
@@ -43,7 +43,7 @@ const setOnFilterClick = (callback) => {
     currentFilter = clickedButton.id;
     callback(getFilteredPictures());
   });
-}
+};
 
 const init = (loadedPictures, callback) => {
   filterElement.classList.remove('img-filters--inactive');

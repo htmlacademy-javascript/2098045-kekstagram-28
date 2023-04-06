@@ -1,4 +1,4 @@
-import {createThumbnais} from './thumbnail.js';
+import {createThumbnails} from './thumbnail.js';
 import { renderGallery } from './gallery.js';
 import {createNewPhotos} from './data.js';
 // import './use-form.js';
@@ -7,14 +7,14 @@ import { showAlert } from './alert.js';
 import { setOnFormSubmit, hideModal } from './use-form.js';
 import { showSuccsessMessage, showErrorMessage } from './message.js';
 import { init, getFilteredPictures } from './filter.js';
-
+import { debounce } from './debounce.js';
 
 // createThumbnai();
 // renderGallery();
 
 //кол-во (массив) фотографий
 const thumbnailElements = createNewPhotos(25);
-createThumbnais(thumbnailElements);
+createThumbnails(thumbnailElements);
 
 renderGallery(thumbnailElements);
 

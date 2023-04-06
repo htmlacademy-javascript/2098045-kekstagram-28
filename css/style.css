@@ -1408,3 +1408,10 @@ main {
 .hidden {
   display: none;
 }
+
+
+.pristine-error {
+  background-color:rgb(134, 8, 8);
+  color: #ffffff;
+
+}

@@ -37,4 +37,4 @@ function createThumbnails(picture) {
 //   container.append(fragment);
 // };
 
-export {createThumbnails, renderThumbnails};
+export {createThumbnails};

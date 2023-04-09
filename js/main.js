@@ -1,4 +1,4 @@
-import {createThumbnails} from './thumbnail.js';
+// import {createThumbnails} from './thumbnail.js';
 import { renderGallery } from './gallery.js';
 import {createNewPhotos} from './data.js';
 // import './use-form.js';
@@ -14,7 +14,7 @@ import { debounce } from './debounce.js';
 
 //кол-во (массив) фотографий
 const thumbnailElements = createNewPhotos(25);
-createThumbnails(thumbnailElements);
+// createThumbnails(thumbnailElements);
 
 renderGallery(thumbnailElements);
 

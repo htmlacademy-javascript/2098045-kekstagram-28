@@ -31,15 +31,18 @@ const setOnFilterClick = (callback) => {
       return;
     }
 
+    const selectedButton = filterElement.querySelector('.img-filters__button--active');
+
+    if (selectedButton) {
+      selectedButton.classList.remove('img-filters__button--active');
+      evt.target.classList.add('img-filters__button--active');
+    }
+
     const clickedButton = evt.target;
     if (clickedButton.id === currentFilter) {
       return;
     }
 
-    filterElement
-      .querySelector('.img-filters__button--active')
-      .classList.remove('.img-filters__button--active');
-    clickedButton.classList.add('.img-filters__button--active');
     currentFilter = clickedButton.id;
     callback(getFilteredPictures());
   });

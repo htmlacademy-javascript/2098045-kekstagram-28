@@ -6,7 +6,7 @@ const container = document.querySelector('.pictures');
 let pictures = [];
 
 const onContainerClick = (evt) => {
-  const thumbnail = evt.target.closest('[data-thumbnail-id]');
+  const thumbnail = evt.target.closest('[data-id]');
   if (!thumbnail) {
     return;
   }

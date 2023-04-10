@@ -1,6 +1,6 @@
 // import {createThumbnails} from './thumbnail.js';
 import { renderGallery } from './gallery.js';
-import {createNewPhotos} from './data.js';
+// import {createNewPhotos} from './data.js';
 // import './use-form.js';
 import { getData, sendData } from './api.js';
 import { showAlert } from './alert.js';
@@ -8,15 +8,16 @@ import { setOnFormSubmit, hideModal } from './use-form.js';
 import { showSuccsessMessage, showErrorMessage } from './message.js';
 import { init, getFilteredPictures } from './filter.js';
 import { debounce } from './debounce.js';
+import './user-photo.js';
 
 // createThumbnai();
 // renderGallery();
 
 //кол-во (массив) фотографий
-const thumbnailElements = createNewPhotos(25);
+// const thumbnailElements = createNewPhotos(25);
 // createThumbnails(thumbnailElements);
 
-renderGallery(thumbnailElements);
+// renderGallery(thumbnailElements);
 
 
 setOnFormSubmit(async (data) => {

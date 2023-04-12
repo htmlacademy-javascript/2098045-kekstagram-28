@@ -7,6 +7,10 @@ const successInner = successMessage.querySelector('.success__inner');
 const errorInner = errorMessage.querySelector('.error__inner');
 
 
+successMessage.addEventListener('click', () => {
+  successMessage.remove();
+});
+
 errorMessage.addEventListener('click', () => {
   errorMessage.remove();
 });
@@ -35,6 +39,7 @@ const showSuccsessMessage = () => {
 const successButton = successMessage.querySelector('.success__button');
 successButton.addEventListener('click', () => {
   successMessage.remove();
+
 });
 
 
@@ -46,7 +51,7 @@ const showErrorMessage = () => {
 
 const errorButton = errorMessage.querySelector('.error__button');
 errorButton.addEventListener('click', () => {
-  errorMessage.classList.add('hidden');
+  errorMessage.remove();
 });
 
 

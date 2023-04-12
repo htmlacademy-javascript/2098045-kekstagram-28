@@ -42,7 +42,7 @@ function showBigPicture ({url, description, comments, likes}) {
 
 //Комментарии к большой картинке
 
-const loader = () => {
+const uploadComments = () => {
   createComments(currentComments.slice(0, commentsLoader + COMMENTS_GROUP));
   commentsLoader += COMMENTS_GROUP;
   if (commentsLoader >= currentComments.length) {
@@ -83,7 +83,7 @@ const renderComments = (comments) => {
     createComments(comments.slice(0, COMMENTS_GROUP));
     commentsLoader += COMMENTS_GROUP;
   }
-  commentsLoaderButton.addEventListener ('click', loader);
+  commentsLoaderButton.addEventListener ('click', uploadComments);
   commentsCount.innerHTML = `${commentsLoader} из <span class="comments-count">${comments.length} комментариев</span>`;
 };
 

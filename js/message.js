@@ -7,10 +7,6 @@ const successInner = successMessage.querySelector('.success__inner');
 const errorInner = errorMessage.querySelector('.error__inner');
 
 
-successMessage.addEventListener('click', () => {
-  successMessage.remove();
-});
-
 errorMessage.addEventListener('click', () => {
   errorMessage.remove();
 });
@@ -38,7 +34,7 @@ const showSuccsessMessage = () => {
 //закрытие всплывающего сообщения при клике и  нажатии кнопки esc
 const successButton = successMessage.querySelector('.success__button');
 successButton.addEventListener('click', () => {
-  successMessage.classList.add('hidden');
+  successMessage.remove();
 });
 
 

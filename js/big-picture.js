@@ -12,6 +12,8 @@ let commentsLoader = 0;
 const commentsLoaderButton = document.querySelector('.social__comments-loader ');
 const commentsCount = document.querySelector('.social__comment-count');
 
+let currentComments;
+
 
 bigPictureCansel.addEventListener('click', () => {
   bigPictureContainer.classList.add('hidden');
@@ -39,6 +41,18 @@ function showBigPicture ({url, description, comments, likes}) {
 }
 
 //Комментарии к большой картинке
+
+const loader = () => {
+  createComments(currentComments.slice(0, commentsLoader + COMMENTS_GROUP));
+  commentsLoader += COMMENTS_GROUP;
+  if (commentsLoader >= currentComments.length) {
+    commentsLoader = currentComments.length;
+    commentsLoaderButton.classList.add('hidden');
+  }
+  commentsCount.innerHTML = `${commentsLoader} из <span class="comments-count">${currentComments.length} комментариев</span>`;
+};
+
+
 function createComments (information) {
   const commentsContainerFragment = document.createDocumentFragment();
 
@@ -59,6 +73,7 @@ function createComments (information) {
 
 //выгружаю нужное кол-во комментариев
 const renderComments = (comments) => {
+  currentComments = comments;
   if (comments.length <= COMMENTS_GROUP) {
     createComments(comments);
     commentsLoader = comments.length;
@@ -68,17 +83,8 @@ const renderComments = (comments) => {
     createComments(comments.slice(0, COMMENTS_GROUP));
     commentsLoader += COMMENTS_GROUP;
   }
-  commentsLoaderButton.addEventListener ('click', () => {
-    createComments(comments.slice(0, commentsLoader + COMMENTS_GROUP));
-    commentsLoader += COMMENTS_GROUP;
-    if (commentsLoader >= comments.length) {
-      commentsLoader = comments.length;
-      commentsLoaderButton.classList.add('hidden');
-    }
-    commentsCount.innerHTML = `${commentsLoader} из <span class="comments-count">${comments.length} комментариев</span>`;
-  });
+  commentsLoaderButton.addEventListener ('click', loader);
   commentsCount.innerHTML = `${commentsLoader} из <span class="comments-count">${comments.length} комментариев</span>`;
-
 };
 
 

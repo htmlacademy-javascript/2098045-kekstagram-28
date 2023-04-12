@@ -16,8 +16,8 @@ const MAX_HASHTAG_COUNT = 20;
 
 const submitButton = document.querySelector('.img-upload__submit');
 const SubmitButtonText = {
-  IDLE: 'Сохранить',
-  SENDING: 'Сохраняю...'
+  IDLE: 'Опубликовать',
+  SENDING: 'Публикую...'
 };
 
 //добавляю вывод ошибок

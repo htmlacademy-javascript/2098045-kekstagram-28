@@ -19,6 +19,7 @@ const imageUploadCancel = document.querySelector('.img-upload__cancel');
 const pictureForm = document.querySelector('.img-upload__form');
 
 const submitButton = document.querySelector('.img-upload__submit');
+const picturePreview = document.querySelector('.img-upload__preview img');
 
 
 //добавляю вывод ошибок
@@ -64,12 +65,15 @@ function onDocumentKeydown(evt) {
   if (evt.key === 'Escape' && !isTextFieldFocused() && !document.querySelector('.error')) {
     evt.preventDefault();
     hideModal();
+    picturePreview.setAttribute('src', '');
   }
 }
 
 //закрытие модалки
 const onCancelButtonClick = () => {
   hideModal();
+  picturePreview.setAttribute('src', '');
+
 };
 
 const onFileInputChange = () => {
@@ -109,8 +113,10 @@ const setOnFormSubmit = (cb) => {
       blockSubmitButton();
       await cb(new FormData(pictureForm));
       unblockSubmitButton();
+      picturePreview.setAttribute('src', '');
     }
   });
+
 };
 
 imageFileField.addEventListener('change', onFileInputChange);

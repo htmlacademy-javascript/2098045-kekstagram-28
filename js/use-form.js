@@ -1,6 +1,13 @@
 import {resetScale} from './scale.js';
 import {resetEffects} from './effect.js';
 
+const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
+const TAG_ERROR_TEXT = 'Ввели не правильное значение';
+const MAX_HASHTAG_COUNT = 20;
+const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Публикую...'
+};
 
 const imageOverlay = document.querySelector('.img-upload__overlay');
 const hashtagField = document.querySelector('.text__hashtags');
@@ -10,15 +17,10 @@ const imageFileField = document.querySelector('.img-upload__input');
 const imageUploadCancel = document.querySelector('.img-upload__cancel');
 
 const pictureForm = document.querySelector('.img-upload__form');
-const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
-const TAG_ERROR_TEXT = 'Ввели не правильное значение';
-const MAX_HASHTAG_COUNT = 20;
 
 const submitButton = document.querySelector('.img-upload__submit');
-const SubmitButtonText = {
-  IDLE: 'Опубликовать',
-  SENDING: 'Публикую...'
-};
+const picturePreview = document.querySelector('.img-upload__preview img');
+
 
 //добавляю вывод ошибок
 const pristine = new Pristine(pictureForm, {
@@ -63,12 +65,15 @@ function onDocumentKeydown(evt) {
   if (evt.key === 'Escape' && !isTextFieldFocused() && !document.querySelector('.error')) {
     evt.preventDefault();
     hideModal();
+    picturePreview.setAttribute('src', '');
   }
 }
 
 //закрытие модалки
 const onCancelButtonClick = () => {
   hideModal();
+  picturePreview.setAttribute('src', '');
+
 };
 
 const onFileInputChange = () => {
@@ -108,8 +113,10 @@ const setOnFormSubmit = (cb) => {
       blockSubmitButton();
       await cb(new FormData(pictureForm));
       unblockSubmitButton();
+      picturePreview.setAttribute('src', '');
     }
   });
+
 };
 
 imageFileField.addEventListener('change', onFileInputChange);

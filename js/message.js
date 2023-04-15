@@ -1,3 +1,5 @@
+import {isEscapeKey} from './util.js';
+
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const successMessage = successTemplate.cloneNode(true);
@@ -23,19 +25,21 @@ errorInner.addEventListener('click', (evt) => {
   evt.stopPropagation();
 });
 
-document.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
+const onCloseMessage = (evt) => {
+  if (isEscapeKey(evt)) {
     successMessage.remove();
     errorMessage.remove();
+    document.removeEventListener('keydown', onCloseMessage);
   }
-});
+};
 
 //клонирую шаблон
 const showSuccsessMessage = () => {
   document.body.append(successMessage);
+  document.addEventListener('keydown', onCloseMessage);
 };
 
-//закрытие всплывающего сообщения при клике и  нажатии кнопки esc
+//закрытие всплывающего сообщения при клике
 const successButton = successMessage.querySelector('.success__button');
 successButton.addEventListener('click', () => {
   successMessage.remove();
@@ -47,7 +51,6 @@ successButton.addEventListener('click', () => {
 const showErrorMessage = () => {
   document.body.append(errorMessage);
 };
-
 
 const errorButton = errorMessage.querySelector('.error__button');
 errorButton.addEventListener('click', () => {

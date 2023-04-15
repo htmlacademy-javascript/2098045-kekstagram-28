@@ -1,3 +1,6 @@
+import { isEscapeKey } from './util.js';
+
+const COMMENTS_GROUP = 5;
 
 const bigPictureContainer = document.querySelector('.big-picture');
 const bigPictureCansel = document.querySelector('.big-picture__cancel');
@@ -7,7 +10,7 @@ const bigPictureLikes = document.querySelector('.likes-count');
 const bigPictureComments = document.querySelector('.comments-count');
 const commentContainer = document.querySelector('.social__comments');
 const commentItem = document.querySelector('.social__comment');
-const COMMENTS_GROUP = 5;
+
 let commentsLoader = 0;
 const commentsLoaderButton = document.querySelector('.social__comments-loader ');
 const commentsCount = document.querySelector('.social__comment-count');
@@ -19,18 +22,20 @@ bigPictureCansel.addEventListener('click', () => {
   bigPictureContainer.classList.add('hidden');
   document.body.classList.remove('modal-open');
   commentsLoader = 0;
-
 });
 
+
 //закрытие большой картинки при нажатии кнопки esc
-document.addEventListener('keydown', (evt) => {
-  if(evt.key === 'Escape') {
+const onClosePicture = (evt) => {
+  if(isEscapeKey(evt)) {
     evt.preventDefault();
     bigPictureContainer.classList.add('hidden');
     document.body.classList.remove('modal-open');
     commentsLoader = 0;
+    document.removeEventListener('keydown', onClosePicture);
   }
-});
+};
+
 
 function showBigPicture ({url, description, comments, likes}) {
   bigPictureContainer.classList.remove('hidden');
@@ -38,11 +43,13 @@ function showBigPicture ({url, description, comments, likes}) {
   bigPictureDescription.textContent = description;
   bigPictureLikes.textContent = likes;
   bigPictureComments.textContent = comments.length;
+  document.addEventListener('keydown', onClosePicture);
 }
+
 
 //Комментарии к большой картинке
 
-const uploadComments = () => {
+const onUploadComments = () => {
   createComments(currentComments.slice(0, commentsLoader + COMMENTS_GROUP));
   commentsLoader += COMMENTS_GROUP;
   if (commentsLoader >= currentComments.length) {
@@ -83,7 +90,7 @@ const renderComments = (comments) => {
     createComments(comments.slice(0, COMMENTS_GROUP));
     commentsLoader += COMMENTS_GROUP;
   }
-  commentsLoaderButton.addEventListener ('click', uploadComments);
+  commentsLoaderButton.addEventListener ('click', onUploadComments);
   commentsCount.innerHTML = `${commentsLoader} из <span class="comments-count">${comments.length} комментариев</span>`;
 };
 

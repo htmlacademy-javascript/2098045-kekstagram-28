@@ -18,13 +18,6 @@ const commentsCount = document.querySelector('.social__comment-count');
 let currentComments;
 
 
-bigPictureCansel.addEventListener('click', () => {
-  bigPictureContainer.classList.add('hidden');
-  document.body.classList.remove('modal-open');
-  commentsLoader = 0;
-});
-
-
 //закрытие большой картинки при нажатии кнопки esc
 const onClosePicture = (evt) => {
   if(isEscapeKey(evt)) {
@@ -35,6 +28,13 @@ const onClosePicture = (evt) => {
     document.removeEventListener('keydown', onClosePicture);
   }
 };
+
+bigPictureCansel.addEventListener('click', () => {
+  bigPictureContainer.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  commentsLoader = 0;
+  document.removeEventListener('keydown', onClosePicture);
+});
 
 
 function showBigPicture ({url, description, comments, likes}) {
